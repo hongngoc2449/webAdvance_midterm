@@ -29,11 +29,13 @@ function displayRooms(data) {
             </div>
         `;
         roomElement.addEventListener("click", () => openRoomDetailPopup(room));
+        
         const bookingButton = roomElement.querySelector(".booking-btn");
         bookingButton.addEventListener("click", (event) => {
             event.stopPropagation(); 
             showBookingPopup(room); 
         });
+        
         roomContainer.appendChild(roomElement);
     });
 }
@@ -42,7 +44,7 @@ fetchData(displayRooms);
 
 
 
-//search
+//Filter rooms by type
 function searchRoomByType(roomType) {
     const filteredRooms = allRooms.filter(room => 
         room.roomType.toLowerCase() === roomType.toLowerCase()
@@ -56,7 +58,7 @@ document.getElementById('searchButton').addEventListener('click', function() {
     if (selectedRoomType) {
         searchRoomByType(selectedRoomType);
     } else {
-        displayRooms(allRooms); // Hiển thị tất cả phòng nếu không chọn gì
+        displayRooms(allRooms); 
     }
 });
 
@@ -89,7 +91,7 @@ function nextSlide() {
 showSlide(currentSlide);
 setInterval(nextSlide, 3000);
 
-// Hàm mở popup chi tiết phòng
+//Display detail popup
 function openRoomDetailPopup(room) {
     document.getElementById("popupImage").src = room.image;
     document.getElementById("popupRoomType").innerText = room.roomType;
@@ -100,12 +102,11 @@ function openRoomDetailPopup(room) {
     document.getElementById("roomDetailPopup").style.display = "flex";
 }
 
-// Hàm đóng popup
 function closeRoomDetailPopup() {
     document.getElementById("roomDetailPopup").style.display = "none";
 }
 
-// Hiển thị popup booking
+// Display booking popup
 function showBookingPopup(room) {
     document.getElementById("roomTypeBooking").value = room.roomType; 
     document.getElementById("checkinDateBooking").value = ""; 
@@ -127,7 +128,7 @@ function closeBookingPopup() {
 }
 
 
-// Xử lý sự kiện khi form được submit
+// submit booking form
 document.getElementById("bookingForm").addEventListener("submit", function(event) {
     event.preventDefault(); 
 
@@ -137,15 +138,12 @@ document.getElementById("bookingForm").addEventListener("submit", function(event
     const checkInDate = document.getElementById("checkinDateBooking").value;
     const checkOutDate = document.getElementById("checkoutDateBooking").value;
 
-    const checkInTimestamp = new Date(checkInDate).getTime() / 1000;
-    const checkOutTimestamp = new Date(checkOutDate).getTime() / 1000;
-
     const bookingData = {
         roomType: roomType,
         adult: adults,
         children: children,
-        checkIn: checkInTimestamp,
-        checkOut: checkOutTimestamp
+        checkIn: checkInDate,
+        checkOut: checkOutDate
     };
 
     fetch("https://6720ca8c98bbb4d93ca60b37.mockapi.io/midterm/t_booking", {
@@ -172,29 +170,26 @@ function showGuestBillingPopup() {
     document.getElementById('bookingPopup').style.display = 'none';
     document.getElementById('guestBillingPopup').style.display = 'flex';
 
-    // Set billing information here based on previous booking data
     document.getElementById('arrivalDate').innerText = document.getElementById('checkinDateBooking').value;
     document.getElementById('departureDate').innerText = document.getElementById('checkoutDateBooking').value;
     document.getElementById('billingRoomType').innerText = document.getElementById('roomTypeBooking').value;
     document.getElementById('guestCount').innerText = `${document.getElementById('adults').value} Adults, ${document.getElementById('children').value} Children`;
+    document.getElementById('totalCost').innerText = '$1000'; 
 }
 
-// Function to close the guest and billing popup
 function closeGuestBillingPopup() {
     document.getElementById('guestBillingPopup').style.display = 'none';
 }
 
-// Modify the booking form submission
 document.getElementById("bookingForm").addEventListener("submit", function(event) {
     event.preventDefault();
     showGuestBillingPopup();
 });
 
-
+//submit guest and billing information
 document.querySelector('.submit-btn').addEventListener('click', function(e) {
     e.preventDefault(); 
     
-    // Lấy dữ liệu từ các input
     const firstName = document.querySelector('input[name="firstName"]').value;
     const lastName = document.querySelector('input[name="lastName"]').value;
     const number = document.querySelector('input[name="number"]').value;
@@ -203,7 +198,6 @@ document.querySelector('.submit-btn').addEventListener('click', function(e) {
     const addressLine2 = document.querySelector('input[name="addressLine2"]').value;
     const specialRequest = document.querySelector('input[name="specialRequest"]').value;
 
-    // Tạo đối tượng chứa dữ liệu để gửi lên API
     const guestData = {
         firstName: firstName,
         lastName: lastName,
@@ -214,7 +208,6 @@ document.querySelector('.submit-btn').addEventListener('click', function(e) {
         specialRequest: specialRequest
     };
 
-    // Gửi dữ liệu đến API bằng fetch
     fetch('https://6720c26d98bbb4d93ca5d871.mockapi.io/midterm/t_guest', {
         method: 'POST',
         headers: {
@@ -231,10 +224,51 @@ document.querySelector('.submit-btn').addEventListener('click', function(e) {
     .then(data => {
         console.log('Success:', data);
         alert('Guest information saved successfully!');
-        
+        closeGuestBillingPopup()
     })
     .catch(error => {
         console.error('Error:', error);
         alert('Failed to save guest information. Please try again.');
+    });
+});
+
+
+document.querySelector('.submit-btn').addEventListener('click', function(e) {
+    e.preventDefault(); 
+    
+    const arrival = document.getElementById('arrivalDate').innerText;
+    const departure = document.getElementById('departureDate').innerText;
+    const roomType = document.getElementById('billingRoomType').innerText;
+    const guest = document.getElementById('guestCount').innerText;
+    const total = document.getElementById('totalCost').innerText.replace('$', ''); 
+
+    const billingData = {
+        arrival: arrival,
+        departure: departure,
+        roomType: roomType,
+        guest: guest,
+        total: parseFloat(total)
+    };
+
+    fetch('https://6720ca8c98bbb4d93ca60b37.mockapi.io/midterm/t_billing', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(billingData)
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Failed to save billing information');
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log('Billing information saved successfully:', data);
+        alert('Billing information saved successfully!');
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('Failed to save billing information. Please try again.');
     });
 });

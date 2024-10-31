@@ -1,6 +1,3 @@
-/* styles.css */
-
-/* Reset and basic styling */
 * {
     margin: 0;
     padding: 0;
@@ -19,20 +16,20 @@ body {
     color: #fff;
     padding: 1rem 2rem;
     display: flex;
-    align-items: center; /* Căn giữa theo chiều dọc */
+    align-items: center; 
 }
 
 .navbar .logo {
     font-size: 1.5rem;
     font-weight: bold;
-    margin-right: 1rem; /* Khoảng cách giữa logo và thanh tìm kiếm */
+    margin-right: 1rem; 
 }
 
 .search-input {
     padding: 0.5rem;
     border: none;
     border-radius: 4px;
-    margin-right: 1.5rem; /* Khoảng cách giữa thanh tìm kiếm và menu */
+    margin-right: 1.5rem; 
 }
 
 .navbar .nav-links {
@@ -52,7 +49,7 @@ body {
 }
 
 
-/* Room list styling */
+
 .room-list {
     padding: 2rem;
     text-align: center;
@@ -300,7 +297,7 @@ body {
     border-radius: 4px;
     font-weight: bold;
     cursor: pointer;
-    margin-left: 10px; /* Khoảng cách giữa nút Clear Filter và Search */
+    margin-left: 10px; 
     transition: background-color 0.3s ease;
 }
 

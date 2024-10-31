@@ -1,4 +1,4 @@
-/* Popup booking slide từ dưới lên */
+
 .booking-popup {
     display: none;
     position: fixed;
@@ -12,14 +12,14 @@
 }
 
 .booking-popup-content {
-    background: #f4f4f4; /* Màu nền xám nhạt */
+    background: #f4f4f4; 
     padding: 30px;
     width: 100%;
     max-width: 800px;
     border-radius: 10px 10px 0 0;
     box-shadow: 0 -8px 16px rgba(0, 0, 0, 0.3);
     position: relative;
-    text-align: left; /* Căn trái */
+    text-align: left; 
     animation: slideUp 0.5s ease forwards;
 }
 
@@ -33,7 +33,7 @@
 }
 
 h3 {
-    color: #a6563a; /* Màu nâu cho tiêu đề */
+    color: #a6563a; 
     font-weight: bold;
     text-transform: uppercase;
     margin-bottom: 20px;
@@ -48,7 +48,7 @@ h3 {
 .input-group {
     display: flex;
     flex-direction: column;
-    width: calc(33.33% - 10px); /* Chia các input thành 3 cột */
+    width: calc(33.33% - 10px); 
 }
 
 .input-group label {
@@ -69,14 +69,14 @@ h3 {
 
 .input-group input:focus, 
 .input-group select:focus {
-    border-color: #a6563a; /* Màu border khi focus */
+    border-color: #a6563a;
     outline: none;
 }
 
 .confirm-booking-btn {
     width: 100%;
     padding: 15px;
-    background-color: #a6563a; /* Màu nâu */
+    background-color: #a6563a; 
     color: #fff;
     border: none;
     border-radius: 5px;
@@ -90,7 +90,7 @@ h3 {
     background-color: #914c32;
 }
 
-/* Dành cho hiệu ứng slide */
+
 @keyframes slideUp {
     from {
         transform: translateY(100%);

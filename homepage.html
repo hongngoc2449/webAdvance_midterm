@@ -25,13 +25,13 @@
     <!-- Thumbnail Slide -->
     <section class="thumbnail-slide">
         <div class="slide active">
-            <img src="https://restinn.webinane.com/wp-content/uploads/2017/10/deluxe-rooms.jpg" alt="Thumbnail 1">
+            <img src="./img/img2.png" alt="Thumbnail 1">
         </div>
         <div class="slide">
-            <img src="https://restinn.webinane.com/wp-content/uploads/2017/10/luxury-rooms.jpg" alt="Thumbnail 2">
+            <img src="./img/img3.png" alt="Thumbnail 2">
         </div>
         <div class="slide">
-            <img src="https://restinn.webinane.com/wp-content/uploads/2017/10/family-rooms.jpg" alt="Thumbnail 3">
+            <img src="./img//img1.png" alt="Thumbnail 3">
         </div>
     </section>
 
@@ -66,7 +66,7 @@
                 </select>
             </div>
             <button type="button" class="search-btn" id="searchButton">Search Now</button>
-            <button id="clearFilterButton" class="clear-filter-btn">Clear Filter</button>
+            <button type="button" id="clearFilterButton" class="clear-filter-btn">Clear Filter</button>
 
         </form>
     </section>
@@ -93,7 +93,7 @@
     </footer>
     
 
-    <!-- Popup chi tiết phòng -->
+    <!-- Popup room detail-->
     <div id="roomDetailPopup" class="room-detail-popup">
         <div class="popup-content">
             <span class="close-btn" onclick="closeRoomDetailPopup()">&times;</span>
@@ -158,12 +158,9 @@
                 <h3>Billing Details</h3>
                 <p>Arrival: <span id="arrivalDate"></span></p>
                 <p>Departure: <span id="departureDate"></span></p>
-                <p>Length of Stay: <span id="lengthOfStay"></span></p>
                 <p>Room: <span id="billingRoomType"></span></p>
                 <p>Guests: <span id="guestCount"></span></p>
-                <p>Best Available Rate: <span id="rate"></span>$</p>
-                <p>Subtotal: <span id="subtotal"></span>$</p>
-                <p>Total Cost: <span id="totalCost"></span>$</p>
+                <p>Total Cost: <span id="totalCost"></span></p>
             </div>
         </div>
     </div>
