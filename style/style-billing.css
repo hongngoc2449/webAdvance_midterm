@@ -1,0 +1,122 @@
+/* Full-Screen Popup for Guest and Billing Information */
+.guest-billing-popup {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 9999;
+}
+
+/* Expanded Popup Content */
+.guest-billing-popup-content {
+    background: #f4f4f4;
+    padding: 40px;
+    width: 90%;
+    max-width: 1200px;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+    position: relative;
+    animation: slideUp 0.5s ease forwards;
+    display: flex;
+    gap: 30px;
+    text-align: left;
+}
+
+/* Close Button */
+.close-guest-billing-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 1.8rem;
+    cursor: pointer;
+    color: #333;
+}
+
+/* Section Headers */
+.guest-info h3, .billing-details h3 {
+    color: #a6563a;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+}
+
+/* Guest Information Form Styling */
+.guest-info {
+    flex: 1;
+}
+
+.guest-info form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.guest-info input {
+    width: calc(50% - 10px);
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+.guest-info input:focus {
+    border-color: #a6563a;
+    outline: none;
+}
+
+/* Submit Button */
+.submit-btn {
+    width: 100%;
+    padding: 15px;
+    background-color: #a6563a;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.submit-btn:hover {
+    background-color: #914c32;
+}
+
+/* Billing Details Styling */
+.billing-details {
+    flex: 1;
+    background: #fff;
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.billing-details p {
+    margin: 12px 0;
+    font-size: 1rem;
+    color: #333;
+}
+
+.billing-details p span {
+    font-weight: bold;
+    color: #a6563a;
+}
+
+/* Animation for Popup Slide Up */
+@keyframes slideUp {
+    from {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}

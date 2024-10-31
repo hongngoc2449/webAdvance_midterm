@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel Booking</title>
+    <link rel="stylesheet" href="./style/styles.css">
+    <link rel="stylesheet" href="./style/style-detail.css">
+    <link rel="stylesheet" href="./style/style-booking.css">
+    <link rel="stylesheet" href="./style/style-billing.css">
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="logo">Hotel Booking</div>
+        <ul class="nav-links">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Rooms</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Thumbnail Slide -->
+    <section class="thumbnail-slide">
+        <div class="slide active">
+            <img src="https://restinn.webinane.com/wp-content/uploads/2017/10/deluxe-rooms.jpg" alt="Thumbnail 1">
+        </div>
+        <div class="slide">
+            <img src="https://restinn.webinane.com/wp-content/uploads/2017/10/luxury-rooms.jpg" alt="Thumbnail 2">
+        </div>
+        <div class="slide">
+            <img src="https://restinn.webinane.com/wp-content/uploads/2017/10/family-rooms.jpg" alt="Thumbnail 3">
+        </div>
+    </section>
+
+
+        <!-- Search Section -->
+    <section class="search-section">
+        <h1>Make A Reservation</h1>
+        <form class="search-form">
+            <div class="input-group">
+                <label for="checkin">Check In:</label>
+                <input type="date" id="checkin" name="checkin">
+            </div>
+            <div class="input-group">
+                <label for="checkout">Check Out:</label>
+                <input type="date" id="checkout" name="checkout">
+            </div>
+            <div class="input-group">
+                <label for="adults">Adults:</label>
+                <input type="number" id="adults" name="adults" min="1" value="0">
+            </div>
+            <div class="input-group">
+                <label for="kids">Kids:</label>
+                <input type="number" id="kids" name="kids" min="0" value="0">
+            </div>
+            <div class="input-group">
+                <label for="room">Room:</label>
+                <select id="roomTypeSelect" name="room">
+                    <option>Standard Room</option>
+                    <option>Family Room</option>
+                    <option>Deluxe Room</option>
+                    <option>Luxury Room</option>
+                </select>
+            </div>
+            <button type="button" class="search-btn" id="searchButton">Search Now</button>
+            <button id="clearFilterButton" class="clear-filter-btn">Clear Filter</button>
+
+        </form>
+    </section>
+
+    <!-- Hotel Room List -->
+    <section class="room-list">
+        <h2>Available Rooms</h2>
+        <div id="room-container">
+            <!-- Rooms will be displayed here -->
+        </div>
+    </section>
+    
+
+
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2024 Hotel Booking. All rights reserved.</p>
+            <ul class="footer-links">
+                <li><a href="#">Privacy Policy</a></li>
+                <li><a href="#">Terms of Service</a></li>
+                <li><a href="#">Contact Us</a></li>
+            </ul>
+        </div>
+    </footer>
+    
+
+    <!-- Popup chi tiết phòng -->
+    <div id="roomDetailPopup" class="room-detail-popup">
+        <div class="popup-content">
+            <span class="close-btn" onclick="closeRoomDetailPopup()">&times;</span>
+            <img id="popupImage" src="" alt="Room Image">
+            <h3 id="popupRoomType"></h3>
+            <p id="popupPrice"></p>
+            <p id="popupRating"></p>
+            <p id="popupDescription"></p>
+            <button class="booking-btn" >Book Now</button>
+        </div>
+    </div>
+
+    <!-- Popup booking -->
+    <div id="bookingPopup" class="booking-popup">
+        <div class="booking-popup-content">
+            <span class="close-booking-btn" onclick="closeBookingPopup()">&times;</span>
+            <h3>Complete Your Booking</h3>
+            <form class="booking-form" id="bookingForm">
+                <div class="input-group">
+                    <label for="roomTypeBooking">Room Type:</label>
+                    <input type="text" id="roomTypeBooking" name="roomTypeBooking" readonly>
+                </div>
+                <div class="input-group">
+                    <label for="checkinDateBooking">Check-in Date:</label>
+                    <input type="date" id="checkinDateBooking" name="checkinDateBooking" required>
+                </div>
+                <div class="input-group">
+                    <label for="checkoutDateBooking">Check-out Date:</label>
+                    <input type="date" id="checkoutDateBooking" name="checkoutDateBooking" required>
+                </div>
+                <div class="input-group">
+                    <label for="adults">Adults:</label>
+                    <input type="number" id="adults" name="adults" min="1" required placeholder="Select adult">
+                </div>
+                <div class="input-group">
+                    <label for="children">Children:</label>
+                    <input type="number" id="children" name="children" min="0" placeholder="Select children">
+                </div>
+                <button type="submit" class="confirm-booking-btn">Confirm Booking</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Popup Guest Information and Billing Details -->
+    <div id="guestBillingPopup" class="guest-billing-popup" style="display: none;">
+        <div class="guest-billing-popup-content">
+            <span class="close-guest-billing-btn" onclick="closeGuestBillingPopup()">&times;</span>
+            <div class="guest-info">
+                <h3>Guest Information</h3>
+                <form id="guestForm">
+                    <input type="text" name="firstName" placeholder="First Name" required />
+                    <input type="text" name="lastName" placeholder="Last Name" required />
+                    <input type="text" name="number" placeholder="Number" required />
+                    <input type="email" name="email" placeholder="Email" required />
+                    <input type="text" name="addressLine1" placeholder="Address Line 1" required />
+                    <input type="text" name="addressLine2" placeholder="Address Line 2" />
+                    <input type="text" name="specialRequest" placeholder="Special Request" />
+                    <button type="submit" class="submit-btn">Submit</button>
+                </form>
+            </div>
+            <div class="billing-details">
+                <h3>Billing Details</h3>
+                <p>Arrival: <span id="arrivalDate"></span></p>
+                <p>Departure: <span id="departureDate"></span></p>
+                <p>Length of Stay: <span id="lengthOfStay"></span></p>
+                <p>Room: <span id="billingRoomType"></span></p>
+                <p>Guests: <span id="guestCount"></span></p>
+                <p>Best Available Rate: <span id="rate"></span>$</p>
+                <p>Subtotal: <span id="subtotal"></span>$</p>
+                <p>Total Cost: <span id="totalCost"></span>$</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="./home.js"></script>
+    <script src="./detail.js"></script>
+
+</body>
+</html>

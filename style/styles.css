@@ -1,0 +1,350 @@
+/* styles.css */
+
+/* Reset and basic styling */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    color: #333;
+}
+
+/* Navbar styling */
+.navbar {
+    background-color: rgb(0, 0, 0);
+    color: #fff;
+    padding: 1rem 2rem;
+    display: flex;
+    align-items: center; /* Căn giữa theo chiều dọc */
+}
+
+.navbar .logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-right: 1rem; /* Khoảng cách giữa logo và thanh tìm kiếm */
+}
+
+.search-input {
+    padding: 0.5rem;
+    border: none;
+    border-radius: 4px;
+    margin-right: 1.5rem; /* Khoảng cách giữa thanh tìm kiếm và menu */
+}
+
+.navbar .nav-links {
+    list-style: none;
+    display: flex;
+    gap: 1.5rem;
+}
+
+.navbar .nav-links a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.navbar .nav-links a:hover {
+    color: #f4f4f9;
+}
+
+
+/* Room list styling */
+.room-list {
+    padding: 2rem;
+    text-align: center;
+}
+
+.room-list h2 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    color: #333;
+}
+
+#room-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+}
+
+.room-card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    height: 100%; 
+}
+
+.room-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.room-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.room-info {
+    padding: 1rem;
+    text-align: left;
+    flex-grow: 1;
+}
+
+.room-info h3 {
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+}
+
+.room-info p {
+    font-size: 1rem;
+    margin-bottom: 0.5rem; 
+    color: #666;
+}
+
+.booking-btn {
+    display: block;
+    width: 100%;
+    padding: 0.5rem;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: auto; 
+}
+
+.booking-btn:hover {
+    background-color: #555;
+}
+
+.room-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+
+/* Thumbnail slide styling */
+.thumbnail-slide {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    height: 400px;
+}
+
+.slide {
+    display: none;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.slide.active {
+    display: block;
+}
+
+.booking-popup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.popup-content {
+    background: #f2f2f2;
+    padding: 20px;
+    width: 80%;
+    max-width: 700px;
+    border-radius: 10px;
+    position: relative;
+    text-align: left;
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.check-availability-btn {
+    display: block;
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+}
+
+.services label {
+    display: inline-block;
+    width: 48%;
+    margin-bottom: 10px;
+}
+
+.date-and-guest-selection {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.date-field,
+.guest-field {
+    flex: 1 1 calc(50% - 10px);
+}
+
+.proceed-btn {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #d87b5e;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+
+/* Search Section Styling */
+.search-section {
+    background: rgb(233, 190, 112);
+    padding: 2rem;
+    text-align: center;
+    color: #fff;
+}
+
+.search-section h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+    color: #fff;
+}
+
+.search-form {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.input-group {
+    flex: 1 1 200px;
+    display: flex;
+    flex-direction: column;
+}
+
+.input-group label {
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+    color: #fff;
+}
+
+.input-group input,
+.input-group select {
+    padding: 0.75rem;
+    border: none;
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.8);
+    color: #333;
+}
+
+.search-btn {
+    padding: 0.75rem 2rem;
+    background-color: #d87b5e;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.search-btn:hover {
+    background-color: #b3694d;
+}
+.clear-filter-btn {
+    padding: 0.5rem;
+    background-color: #555;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-left: 10px; /* Khoảng cách giữa nút Clear Filter và Search */
+    transition: background-color 0.3s ease;
+}
+
+.clear-filter-btn:hover {
+    background-color: #777;
+}
+
+
+
+/* Footer Styling */
+.footer {
+    background-color: rgb(233, 190, 112);
+    color: #fff;
+    padding: 1.5rem 0;
+    text-align: center;
+    margin-top: 2rem;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.footer p {
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.footer-links {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-top: 0.5rem;
+}
+
+.footer-links a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+    color: #111111;
+}

@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý Booking Khách Sạn</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f8f8;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        h2 {
+            color: #9A504F;
+            margin: 20px 0;
+        }
+        .form-container {
+            max-width: 600px;
+            width: 100%;
+            background-color: #fff;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #555;
+        }
+        input[type="text"],
+        input[type="date"],
+        input[type="number"] {
+            width: 100%;
+            padding: 12px;
+            margin: 5px 0 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        .additional-services {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin: 15px 0;
+        }
+        .additional-services div {
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+            background-color: #f0f0f0;
+            padding: 8px;
+            border-radius: 4px;
+        }
+        .additional-services input[type="checkbox"] {
+            margin-right: 8px;
+        }
+        button[type="submit"] {
+            background-color: #9A504F;
+            color: #fff;
+            padding: 12px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+            margin-top: 10px;
+        }
+        button[type="submit"]:hover {
+            background-color: #b7625d;
+        }
+        .card-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            max-width: 1200px;
+            width: 100%;
+            margin-top: 20px;
+        }
+        .card {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 10px;
+            width: 300px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+            transition: transform 0.2s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+        .card h3 {
+            color: #9A504F;
+            margin: 0 0 10px;
+        }
+        .card p {
+            font-size: 14px;
+            color: #555;
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <h2>Thêm Booking</h2>
+    <div class="form-container">
+        <form id="bookingForm">
+            <label for="customerName">Tên khách hàng:</label>
+            <input type="text" id="customerName" name="customerName" required>
+
+            <label for="roomType">Loại phòng:</label>
+            <input type="text" id="roomType" name="roomType" required>
+
+            <label for="checkInDate">Ngày check-in:</label>
+            <input type="date" id="checkInDate" name="checkInDate" required>
+
+            <label for="checkOutDate">Ngày check-out:</label>
+            <input type="date" id="checkOutDate" name="checkOutDate" required>
+
+            <label for="adults">Số người lớn:</label>
+            <input type="number" id="adults" name="adults" required>
+
+            <label for="children">Số trẻ em:</label>
+            <input type="number" id="children" name="children">
+
+            <label>Dịch vụ bổ sung:</label>
+            <div class="additional-services">
+                <div><input type="checkbox" value="Car & ATV Rental">Car & ATV Rental (60)</div>
+                <div><input type="checkbox" value="Yacht Hiring">Yacht Hiring (70)</div>
+                <div><input type="checkbox" value="Postal/Parcel Services">Postal/Parcel Services (10)</div>
+                <div><input type="checkbox" value="Porter Service">Porter Service (80)</div>
+                <div><input type="checkbox" value="Horse Back Riding">Horse Back Riding (100)</div>
+            </div>
+
+            <label for="totalPrice">Tổng chi phí (VND):</label>
+            <input type="number" id="totalPrice" name="totalPrice" required>
+
+            <button type="submit">Thêm Booking</button>
+        </form>
+    </div>
+
+    <h2>Danh sách Booking</h2>
+    <div class="card-container" id="bookingList"></div>
+
+    <script>
+        // Add booking to API
+        function addBookingToAPI(data) {
+            return fetch('https://6720ca8c98bbb4d93ca60b37.mockapi.io/midterm/t_booking', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .catch(error => alert('Cannot add booking. Error: ' + error));
+        }
+
+        // Fetch bookings from API
+        function fetchBookingsFromAPI() {
+            fetch('https://6720ca8c98bbb4d93ca60b37.mockapi.io/midterm/t_booking')
+                .then(response => response.json())
+                .then(bookings => displayBookings(bookings))
+                .catch(error => console.error('Error fetching bookings:', error));
+        }
+
+        // Display bookings as cards
+        function displayBookings(bookings) {
+            const bookingList = document.getElementById('bookingList');
+            bookingList.innerHTML = ''; // Clear old list
+
+            bookings.forEach(booking => {
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.innerHTML = `
+                    <h3>${booking.customerName}</h3>
+                    <p>Phòng: ${booking.roomType}</p>
+                    <p>Check-in: ${new Date(booking.checkInDate).toLocaleDateString()}</p>
+                    <p>Check-out: ${new Date(booking.checkOutDate).toLocaleDateString()}</p>
+                    <p>Người lớn: ${booking.adults}</p>
+                    <p>Trẻ em: ${booking.children}</p>
+                    <p>Dịch vụ: ${Array.isArray(booking.services) ? booking.services.join(", ") : booking.services}</p>
+                    <p>Tổng chi phí: ${booking.totalPrice} VND</p>
+                `;
+                bookingList.appendChild(card);
+            });
+        }
+
+        // Handle form submit
+        document.getElementById('bookingForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            const data = {
+                customerName: document.getElementById('customerName').value,
+                roomType: document.getElementById('roomType').value,
+                checkInDate: document.getElementById('checkInDate').value,
+                checkOutDate: document.getElementById('checkOutDate').value,
+                adults: parseInt(document.getElementById('adults').value),
+                children: parseInt(document.getElementById('children').value) || 0,
+                services: Array.from(document.querySelectorAll('.additional-services input:checked')).map(input => input.value),
+                totalPrice: parseInt(document.getElementById('totalPrice').value)
+            };
+
+            addBookingToAPI(data).then(() => {
+                alert('Booking added successfully!');
+                fetchBookingsFromAPI(); // Refresh booking list
+            });
+        });
+
+        // Load bookings on page load
+        window.onload = fetchBookingsFromAPI;
+    </script>
+</body>
+</html>
